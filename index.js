@@ -17,10 +17,20 @@ io.on('connection', (socket)=>{
     socket.on('disconnect', ()=>{
         console.log("User disconnected.")
     })
-    socket.on('chat message', (msg)=>{
-        // console.log("message", msg)
-        io.emit('chat message', msg)
-    });
+    // socket.on('chat message', (msg)=>{
+    //     // console.log("message", msg)
+    //     io.emit('chat message', msg)
+    // });
+
+    io.on('connection', (socket) => {
+        socket.on('request', (arg1, arg2, callback) => {
+          console.log(arg1); // { foo: 'bar' }
+          console.log(arg2); // 'baz'
+          callback({
+            status: 'ok'
+          });
+        });
+      });
 })
 
 AppServer.listen(4001, ()=>{
