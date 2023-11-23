@@ -14,13 +14,18 @@
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages > li { padding: 0.5rem 1rem; }
       #messages > li:nth-child(odd) { background: #efefef; }
-      #form {background-color: blue;}
+      #form {background-color: blue; margin-bottom: 10vh; height: 30vh;}
+      #sendBtn{ width: 10%; height: 40%; margin-top: 30%;}
     </style>
   </head>
   <body>
     <ul id="messages"></ul>
     <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
+      <input id="input" autocomplete="off" /><button id="sendBtn">Send</button>
     </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+    </script>
   </body>
 </html>
