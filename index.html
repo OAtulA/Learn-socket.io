@@ -146,13 +146,21 @@
         e.preventDefault();
         if (input.value) {
           try {
-            const response = socket.timeout(5000).emitWithAck('request', input.value, 'baz');
-            // console.log(response.status); // 'ok'
-            console.log(JSON.stringify(response))
-            console.log(response.status)
+            /*
+            Here the arguments passed was missing the callback function you are trying to call in index.js
+            as response was a promise added promise handling code (you can remove if you dont want it).
+            */
+            const responsePromise = new Promise((resolve, reject) => {
+              socket.timeout(5000).emitWithAck('request', input.value, 'baz');
+            });
+
+            responsePromise.then((resolvedData) => {
+              console.log("Resolved data : ",resolvedData);
+            }).catch((error) => {
+              console.error("Errored data",error);
+            });
           } catch (e) {
             console.log(e)
-            // the server did not acknowledge the event in the given delay
           }
           input.value = '';
         }
@@ -164,6 +172,7 @@
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });
+
     </script>
   </body>
 

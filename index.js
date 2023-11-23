@@ -31,15 +31,17 @@ io.on('connection', (socket) => {
   //     });
   // });
 
-  /* Something is wrong here */
-  // socket.on('request', (message, callback) => {
-  //   console.log(message);
-  //   callback({status: 'ok'});
-  // })
+  /* Something is wrong here
+    adding argument as it was missing.
+  */
+  socket.on('request', (message, argument, callback) => {
+    console.log("first request socket event : ",message);
+    callback({status: 'ok'});
+  })
 
 
     socket.on('request', (arg1, arg2, callback) => {
-      console.log(arg1); // { foo: 'bar' }
+      console.log("Second request socket event : ",arg1); // { foo: 'bar' }
       console.log(arg2); // 'baz'
       callback({
         status: 'ok'
