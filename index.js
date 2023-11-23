@@ -4,8 +4,8 @@ const path = require("path")
 const {Server} = require("socket.io")
 
 const app = express()
-const server = createServer(app);
-const io = new Server(server);
+const AppServer = createServer(app);
+const io = new Server(AppServer);
 
 app.get('/', (req, res)=>{
     // res.send('<h1>Hi Devs</h1>')
@@ -16,6 +16,6 @@ io.on('connection', (socket)=>{
     console.log("A user is connected")
 })
 
-server.listen(4001, ()=>{
+AppServer.listen(4001, ()=>{
     console.log("Server is listening on http://localhost:4001")
 })
